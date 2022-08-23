@@ -1,0 +1,19 @@
+{
+  "$schema": "./node_modules/nx/schemas/workspace-schema.json",
+  "version": 2,
+  "projects": {
+    "admin": "apps/admin",
+    "admin-e2e": "apps/admin-e2e",
+    "api-admin": "libs/api/admin",
+    "api-client": "libs/api/client",
+    "api-share": "libs/api/share",
+    "core-auth": "libs/core/auth",
+    "core-http": "libs/core/http",
+    "main": "apps/main",
+    "main-e2e": "apps/main-e2e",
+    "stub-admin": "libs/stub/admin",
+    "stub-client": "libs/stub/client",
+    "stub-share": "libs/stub/share",
+    "testing-unit-utils": "libs/testing/unit-utils"
+  }
+}
