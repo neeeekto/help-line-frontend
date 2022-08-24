@@ -5,7 +5,9 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/admin",
         "index": "apps/admin/src/index.html",
@@ -13,8 +15,18 @@
         "polyfills": "apps/admin/src/polyfills.ts",
         "tsConfig": "apps/admin/tsconfig.app.json",
         "inlineStyleLanguage": "less",
-        "assets": ["apps/admin/src/favicon.ico", "apps/admin/src/assets"],
-        "styles": ["apps/admin/src/styles.less"],
+        "assets": [
+          "apps/admin/src/favicon.ico",
+          "apps/admin/src/assets",
+          {
+            "glob": "**/*",
+            "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
+            "output": "/assets/"
+          }
+        ],
+        "styles": [
+          "apps/admin/src/styles.less"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -74,12 +86,17 @@
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": ["apps/admin/**/*.ts", "apps/admin/**/*.html"]
+        "lintFilePatterns": [
+          "apps/admin/**/*.ts",
+          "apps/admin/**/*.html"
+        ]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/admin"],
+      "outputs": [
+        "coverage/apps/admin"
+      ],
       "options": {
         "jestConfig": "apps/admin/jest.config.ts",
         "passWithNoTests": true
@@ -101,7 +118,9 @@
     },
     "build-storybook": {
       "executor": "@storybook/angular:build-storybook",
-      "outputs": ["{options.outputDir}"],
+      "outputs": [
+        "{options.outputDir}"
+      ],
       "options": {
         "outputDir": "dist/storybook/admin",
         "configDir": "apps/admin/.storybook",

@@ -5,7 +5,9 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/testing/cy-utils"],
+      "outputs": [
+        "coverage/libs/testing/cy-utils"
+      ],
       "options": {
         "jestConfig": "libs/testing/cy-utils/jest.config.ts",
         "passWithNoTests": true

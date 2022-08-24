@@ -5,7 +5,9 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/stub/share"],
+      "outputs": [
+        "coverage/libs/stub/share"
+      ],
       "options": {
         "jestConfig": "libs/stub/share/jest.config.ts",
         "passWithNoTests": true

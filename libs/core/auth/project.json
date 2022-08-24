@@ -5,7 +5,9 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/core/auth"],
+      "outputs": [
+        "coverage/libs/core/auth"
+      ],
       "options": {
         "jestConfig": "libs/core/auth/jest.config.ts",
         "passWithNoTests": true
