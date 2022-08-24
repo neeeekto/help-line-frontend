@@ -1,0 +1,22 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/ng-query/src",
+  "prefix": "help-line",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/ng-query"],
+      "options": {
+        "jestConfig": "libs/ng-query/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/ng-query/**/*.ts", "libs/ng-query/**/*.html"]
+      }
+    }
+  },
+  "tags": []
+}

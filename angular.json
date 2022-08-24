@@ -11,6 +11,7 @@
     "core-http": "libs/core/http",
     "main": "apps/main",
     "main-e2e": "apps/main-e2e",
+    "ng-query": "libs/ng-query",
     "stub-admin": "libs/stub/admin",
     "stub-client": "libs/stub/client",
     "stub-share": "libs/stub/share",
