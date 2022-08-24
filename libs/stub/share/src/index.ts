@@ -1,1 +1,1 @@
-export * from './lib/stub-share';
+export * from './lib/stub-share.module';

@@ -4,6 +4,9 @@
   "affected": {
     "defaultBase": "main"
   },
+  "cli": {
+    "packageManager": "npm"
+  },
   "implicitDependencies": {
     "package.json": {
       "dependencies": "*",
@@ -21,7 +24,7 @@
           "test",
           "e2e"
         ],
-        "accessToken": "MjA4NDRkNDItZjY2Ny00ZjU5LWFjMTMtOTMwNzNjOTJiZWQ3fHJlYWQtd3JpdGU="
+        "accessToken": "MzAzMTcwNzYtNzFlYi00Y2FkLTk4NTEtZTE0Zjc3YjY1YjE3fHJlYWQtd3JpdGU="
       }
     }
   },
@@ -33,19 +36,18 @@
     }
   },
   "generators": {
-    "@nrwl/react": {
-      "application": {
-        "style": "scss",
-        "linter": "eslint",
-        "babel": true
-      },
-      "component": {
-        "style": "scss"
-      },
-      "library": {
-        "style": "scss",
-        "linter": "eslint"
-      }
+    "@nrwl/angular:application": {
+      "style": "less",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "less"
     }
   },
   "defaultProject": "main"

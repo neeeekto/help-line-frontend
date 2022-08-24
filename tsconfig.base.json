@@ -23,6 +23,7 @@
       "@help-line/stub/admin": ["libs/stub/admin/src/index.ts"],
       "@help-line/stub/client": ["libs/stub/client/src/index.ts"],
       "@help-line/stub/share": ["libs/stub/share/src/index.ts"],
+      "@help-line/testing/cy-utils": ["libs/testing/cy-utils/src/index.ts"],
       "@help-line/testing/unit-utils": ["libs/testing/unit-utils/src/index.ts"]
     }
   },

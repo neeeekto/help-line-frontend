@@ -1,1 +1,1 @@
-export * from './lib/stub-client';
+export * from './lib/stub-client.module';

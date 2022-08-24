@@ -1,1 +1,1 @@
-export * from './lib/api-share';
+export * from './lib/api-share.module';

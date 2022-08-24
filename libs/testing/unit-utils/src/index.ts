@@ -1,1 +1,1 @@
-export * from './lib/testing-unit-utils';
+export * from './lib/testing-unit-utils.module';

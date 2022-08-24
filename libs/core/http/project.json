@@ -1,16 +1,8 @@
 {
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/core/http/src",
   "projectType": "library",
-  "tags": [],
+  "sourceRoot": "libs/core/http/src",
+  "prefix": "help-line",
   "targets": {
-    "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["libs/core/http/**/*.{ts,tsx,js,jsx}"]
-      }
-    },
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/core/http"],
@@ -18,6 +10,16 @@
         "jestConfig": "libs/core/http/jest.config.ts",
         "passWithNoTests": true
       }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/core/http/**/*.ts",
+          "libs/core/http/**/*.html"
+        ]
+      }
     }
-  }
+  },
+  "tags": []
 }

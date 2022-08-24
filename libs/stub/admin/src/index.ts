@@ -1,1 +1,1 @@
-export * from './lib/stub-admin';
+export * from './lib/stub-admin.module';

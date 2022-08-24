@@ -1,16 +1,8 @@
 {
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/core/auth/src",
   "projectType": "library",
-  "tags": [],
+  "sourceRoot": "libs/core/auth/src",
+  "prefix": "help-line",
   "targets": {
-    "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["libs/core/auth/**/*.{ts,tsx,js,jsx}"]
-      }
-    },
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/core/auth"],
@@ -18,6 +10,16 @@
         "jestConfig": "libs/core/auth/jest.config.ts",
         "passWithNoTests": true
       }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/core/auth/**/*.ts",
+          "libs/core/auth/**/*.html"
+        ]
+      }
     }
-  }
+  },
+  "tags": []
 }

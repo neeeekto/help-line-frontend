@@ -1,1 +1,1 @@
-export * from './lib/core-auth';
+export * from './lib/core-auth.module';
