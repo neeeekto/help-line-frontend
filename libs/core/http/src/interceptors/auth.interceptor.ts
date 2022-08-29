@@ -12,18 +12,39 @@ export interface AuthToken {
   type: string;
 }
 
+export interface AuthFacade {
+  getToken():
+    | Promise<AuthToken | undefined | null>
+    | AuthToken
+    | undefined
+    | null;
+  logout(): Promise<void>;
+}
+
 export class AuthInterceptor extends HttpInterceptor {
-  private readonly tokenGetter: () => Promise<AuthToken | undefined>;
-  constructor(tokenGetter: () => Promise<AuthToken | undefined>) {
+  private readonly authFacade: AuthFacade;
+  constructor(authFacade: AuthFacade) {
     super();
-    this.tokenGetter = tokenGetter;
+    this.authFacade = authFacade;
+    if (!authFacade) {
+      throw new Error('Provide auth facade');
+    }
   }
 
   async intercept(req: HttpRequest, next: HttpHandler): Promise<HttpResponse> {
-    const token = await this.tokenGetter();
+    const token = await this.authFacade.getToken();
     if (token) {
       set(req, ['headers', 'Authorization'], `${token.type} ${token.value}`);
     }
-    return next.handle(req);
+    try {
+      return await next.handle(req);
+    } catch (e) {
+      const err = e as HttpResponse;
+      if (err?.status === 401) {
+        await this.authFacade.logout();
+      }
+
+      throw e;
+    }
   }
 }

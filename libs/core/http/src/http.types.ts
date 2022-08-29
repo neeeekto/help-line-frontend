@@ -33,10 +33,10 @@ export interface HttpResponseEvent {
 }
 
 export interface HttpResponse<TData = unknown> extends HttpResponseEvent {
-  data: TData;
-  status: number;
-  statusText: string;
-  headers: Record<string, any>;
+  data?: TData;
+  status?: number;
+  statusText?: string;
+  headers?: Record<string, any>;
 }
 
 export interface HttpHandler {

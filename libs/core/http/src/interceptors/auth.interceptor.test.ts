@@ -1,33 +1,77 @@
-import { AuthInterceptor, AuthToken } from './auth.interceptor';
-import { mock, instance, anything, when } from 'ts-mockito';
+import { AuthFacade, AuthInterceptor, AuthToken } from './auth.interceptor';
+import { mock, instance, anything, when, reset, verify } from 'ts-mockito';
 import { HttpHandler, HttpRequest } from '../http.types';
+import { HttpError } from '../http.error';
 
 describe('AuthInterceptor', () => {
   const token: AuthToken = { type: 'test', value: '123' };
-  const tokenGetter = jest.fn();
-  const interceptor = new AuthInterceptor(tokenGetter);
+  const authFacadeMock = mock<AuthFacade>();
+  const interceptor = new AuthInterceptor(instance(authFacadeMock));
   let nextMock: HttpHandler;
 
   beforeEach(() => {
-    tokenGetter.mockClear();
-    tokenGetter.mockReturnValue(token);
+    reset(authFacadeMock);
+    when(authFacadeMock.getToken()).thenReturn(token);
     nextMock = mock<HttpHandler>();
     when(nextMock.handle(anything())).thenResolve({} as any);
   });
 
-  it('does nothing if there is no token', async () => {
-    tokenGetter.mockClear().mockReturnValue(null);
+  it('should throw error if auth dep is null', async () => {
+    expect(() => new AuthInterceptor(null!)).toThrow();
+  });
+
+  it('should do nothing if there is no token', async () => {
+    when(authFacadeMock.getToken()).thenReturn(null);
     const req: HttpRequest = {};
     await interceptor.intercept(req, instance(nextMock));
 
     expect(req?.headers?.['Authorization']).toBeFalsy();
   });
 
-  it('set token', async () => {
+  it('should set token', async () => {
     const req: HttpRequest = {};
     await interceptor.intercept(req, instance(nextMock));
 
-    expect(tokenGetter).toBeCalled();
     expect(req?.headers?.['Authorization']).toBeTruthy();
   });
+
+  it('should get token from auth facade', async () => {
+    const req: HttpRequest = {};
+    await interceptor.intercept(req, instance(nextMock));
+
+    verify(authFacadeMock.getToken()).once();
+  });
+
+  it('should handle 401 error', () => {
+    expect.assertions(1);
+    const req: HttpRequest = {};
+    when(authFacadeMock.logout()).thenReturn(Promise.resolve());
+    when(nextMock.handle(anything())).thenReject(
+      new HttpError({ config: req, status: 401 })
+    );
+
+    return interceptor.intercept(req, instance(nextMock)).catch((e) => {
+      const err = e as HttpError;
+      expect(err.status).toBe(401);
+      verify(authFacadeMock.logout()).once();
+    });
+  });
+
+  test.each([400, 403, 404, 409, 500, 503])(
+    'should ignore %d error',
+    (code) => {
+      expect.assertions(1);
+      const req: HttpRequest = {};
+      when(authFacadeMock.logout()).thenReturn(Promise.resolve());
+      when(nextMock.handle(anything())).thenReject(
+        new HttpError({ config: req, status: code })
+      );
+
+      return interceptor.intercept(req, instance(nextMock)).catch((e) => {
+        const err = e as HttpError;
+        expect(err.status).toBe(code);
+        verify(authFacadeMock.logout()).never();
+      });
+    }
+  );
 });

@@ -9,6 +9,7 @@
     "api-share": "libs/api/share",
     "core-auth": "libs/core/auth",
     "core-http": "libs/core/http",
+    "core-root": "libs/core/root",
     "main": "apps/main",
     "main-e2e": "apps/main-e2e",
     "stub-admin": "libs/stub/admin",

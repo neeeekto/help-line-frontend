@@ -1,6 +1,7 @@
 import { HttpHandler, HttpRequest, HttpResponse } from './http.types';
 import axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 import { stringify } from 'qs';
+import { HttpError } from './http.error';
 
 export class AxiosHttpBackend implements HttpHandler {
   private readonly axios: AxiosInstance;
@@ -13,9 +14,9 @@ export class AxiosHttpBackend implements HttpHandler {
     });
   }
 
-  handle(req: HttpRequest): Promise<HttpResponse> {
-    return this.axios
-      .request({
+  async handle(req: HttpRequest): Promise<HttpResponse> {
+    try {
+      const res = await this.axios.request({
         url: req.url,
         method: req.method,
         baseURL: req.baseURL,
@@ -28,11 +29,11 @@ export class AxiosHttpBackend implements HttpHandler {
         xsrfHeaderName: req.xsrfHeaderName,
         onUploadProgress: req.onUploadProgress,
         onDownloadProgress: req.onDownloadProgress,
-      })
-      .then((res) => this.toHttpResponse(req, res))
-      .catch((e: AxiosError) =>
-        Promise.reject(this.toHttpResponse(req, e.response))
-      );
+      });
+      return this.toHttpResponse(req, res);
+    } catch (e) {
+      throw new HttpError(this.toHttpResponse(req, (e as AxiosError).response));
+    }
   }
 
   private toHttpResponse(

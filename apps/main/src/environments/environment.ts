@@ -3,4 +3,6 @@
 
 export const environment = {
   production: false,
+  apiPrefix: process.env['REACT_APP_API_PREFIX'] || 'api',
+  serverUrl: process.env['REACT_APP_API_SERVER'] || window.location.origin,
 };

@@ -18,8 +18,8 @@ describe('HttpClient', () => {
     when(backendMock.handle(anything())).thenResolve({} as HttpResponse);
   });
 
-  it('should creating', () => {
-    expect(new HttpClient(instance(backendMock))).toBeTruthy();
+  it('should create', () => {
+    expect(() => new HttpClient(instance(backendMock))).not.toThrow();
   });
 
   it('throw error if backend is empty', () => {
