@@ -8,6 +8,7 @@
     "api-client": "libs/api/client",
     "api-share": "libs/api/share",
     "core-auth": "libs/core/auth",
+    "core-events": "libs/core/events",
     "core-http": "libs/core/http",
     "core-root": "libs/core/root",
     "main": "apps/main",
