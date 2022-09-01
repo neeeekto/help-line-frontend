@@ -49,7 +49,7 @@ export class HttpClient {
     return this.fetch<TResult>({ method: HttpMethod.GET, url, ...params });
   }
 
-  public post<TResult>(url: string, data: any, params?: HttpRequestParams) {
+  public post<TResult>(url: string, data?: any, params?: HttpRequestParams) {
     return this.fetch<TResult>({
       method: HttpMethod.POST,
       url,
