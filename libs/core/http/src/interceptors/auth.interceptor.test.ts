@@ -57,6 +57,34 @@ describe('AuthInterceptor', () => {
     });
   });
 
+  it('should ignore error without status code', () => {
+    expect.assertions(1);
+    const req: HttpRequest = {};
+    when(authFacadeMock.logout()).thenReturn(Promise.resolve());
+    when(nextMock.handle(anything())).thenReject(
+      new HttpError({ config: req })
+    );
+
+    return interceptor.intercept(req, instance(nextMock)).catch((e) => {
+      const err = e as HttpError;
+      expect(err.status).toBeUndefined();
+      verify(authFacadeMock.logout()).never();
+    });
+  });
+
+  it('should ignore unknown error ', () => {
+    expect.assertions(1);
+    const req: HttpRequest = {};
+    when(authFacadeMock.logout()).thenReturn(Promise.resolve());
+    when(nextMock.handle(anything())).thenReject(new Error());
+
+    return interceptor.intercept(req, instance(nextMock)).catch((e) => {
+      const err = e as HttpError;
+      expect(err.status).toBeUndefined();
+      verify(authFacadeMock.logout()).never();
+    });
+  });
+
   test.each([400, 403, 404, 409, 500, 503])(
     'should ignore %d error',
     (code) => {
