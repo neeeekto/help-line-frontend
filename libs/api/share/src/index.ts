@@ -1,1 +1,2 @@
-export * from './lib/api-share';
+export * from './common.types';
+export * from './meta.types';
