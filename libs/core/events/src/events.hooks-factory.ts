@@ -4,7 +4,6 @@ import { useContext, useEffect } from 'react';
 import { EventsContext } from './events.contexts';
 
 const useEventsService = <TEvents extends FnMapper, TCommands extends FnMapper>(
-  serverUrl: string,
   hubKey: string,
   events: TEvents,
   commands: TCommands
@@ -13,7 +12,7 @@ const useEventsService = <TEvents extends FnMapper, TCommands extends FnMapper>(
   let service = ctx.hubs[hubKey];
   if (!service) {
     service = new EventsService<TEvents, TCommands>(
-      serverUrl,
+      ctx.serverUrl,
       hubKey,
       ctx.accessTokenFactory,
       commands,
@@ -32,7 +31,7 @@ export const makeUseEventServiceHook =
     commands: TCommands
   ) =>
   (): IEventsService<TEvents, TCommands> => {
-    const service = useEventsService(serverUrl, hubKey, events, commands);
+    const service = useEventsService(hubKey, events, commands);
     useEffect(() => {
       service.start();
       return () => {
