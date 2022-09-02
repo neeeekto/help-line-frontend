@@ -1,7 +1,7 @@
-import React, { PropsWithChildren, useMemo, useRef } from 'react';
+import React, { PropsWithChildren, useMemo, createElement } from 'react';
 import { HttpClient } from './http.client';
 import { AxiosHttpBackend } from './axios.http-backend';
-import { HttpContext } from './http.context';
+import { HttpContext } from './index';
 import { HttpInterceptor } from './http.types';
 import { ApiCacheContext } from './api-cache.context';
 
@@ -22,11 +22,19 @@ export const HttpProvider: React.FC<HttpProviderProps> = React.memo((props) => {
 
   const apiCache = useMemo(() => new Map(), []);
 
-  return (
+  // Do not change, cypress dont know tsx files
+  return createElement(HttpContext.Provider, {
+    value: httpClient,
+    children: createElement(ApiCacheContext.Provider, {
+      value: apiCache,
+      children: props.children,
+    }),
+  });
+  /*return (
     <HttpContext.Provider value={httpClient}>
       <ApiCacheContext.Provider value={apiCache}>
         {props.children}
       </ApiCacheContext.Provider>
     </HttpContext.Provider>
-  );
+  );*/
 });

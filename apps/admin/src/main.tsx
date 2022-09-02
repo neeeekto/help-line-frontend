@@ -1,16 +1,26 @@
 import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
 
 import App from './app/app';
+import { AuthGuard, AuthProvider } from '@help-line/core/auth';
+import { environment } from './environments/environment';
+import {
+  DefaultEventsProvider,
+  DefaultHttpProvider,
+  QueryProvider,
+} from '@help-line/core/root';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <QueryProvider>
+      <AuthProvider settings={environment.oauth}>
+        <DefaultHttpProvider env={environment}>
+          <App />
+        </DefaultHttpProvider>
+      </AuthProvider>
+    </QueryProvider>
   </StrictMode>
 );

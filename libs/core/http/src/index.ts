@@ -5,3 +5,4 @@ export * from './http.context';
 export * from './http.types';
 export * from './interceptors';
 export * from './api.hooks';
+export * from './api.types';

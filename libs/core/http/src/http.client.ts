@@ -33,6 +33,7 @@ export type HttpRequestParams = Partial<
 export class HttpClient {
   private readonly backend!: HttpHandler;
   private interceptors: HttpInterceptor[] = [new NoopInterceptor()];
+  private chain!: HttpHandler;
 
   constructor(backend: HttpHandler, defaultInterceptors?: HttpInterceptor[]) {
     if (!backend) {
@@ -43,6 +44,7 @@ export class HttpClient {
     if (defaultInterceptors?.length) {
       this.interceptors.unshift(...defaultInterceptors);
     }
+    this.chain = this.createChain();
   }
 
   public get<TResult>(url: string, params?: HttpRequestParams) {
@@ -84,12 +86,8 @@ export class HttpClient {
     });
   }
 
-  private fetch<TData>(opt: HttpRequest): Promise<HttpResponse<TData>> {
-    const chain = this.interceptors.reduceRight(
-      (next, interceptor) => new HttpInterceptorHandler(next, interceptor),
-      this.backend
-    );
-    return chain.handle(opt) as Promise<HttpResponse<TData>>;
+  private fetch<TData>(req: HttpRequest): Promise<HttpResponse<TData>> {
+    return this.chain.handle(req) as Promise<HttpResponse<TData>>;
   }
 
   withInterceptors(...interceptors: HttpInterceptor[]): HttpClient {
@@ -106,6 +104,13 @@ export class HttpClient {
         (i) =>
           !interceptors.some((interceptorType) => i instanceof interceptorType)
       )
+    );
+  }
+
+  private createChain() {
+    return this.interceptors.reduceRight(
+      (next, interceptor) => new HttpInterceptorHandler(next, interceptor),
+      this.backend
     );
   }
 }

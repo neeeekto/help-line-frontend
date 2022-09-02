@@ -4,7 +4,7 @@ import { HttpClient } from '@help-line/core/http';
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const jobsApi = (http: HttpClient) => ({
-  get: () => http.get<Job[]>('/api/v1/jobs').then((x) => x.data),
+  get: () => http.get<Job[]>('/api/v1/jobs').then((x) => x.data!),
   getById: (jobId: Job['id']) =>
     http.get<Job>(`/api/v1/jobs/${jobId}`).then((x) => x.data),
   create: (task: string, data: JobData) =>

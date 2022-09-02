@@ -13,12 +13,12 @@ export class PrefixInterceptor extends HttpInterceptor {
     super();
     this.apiPrefix = apiPrefix;
     this.serverUrl = serverUrl;
-    this.throwIfUrlIsInvalid(serverUrl);
+    // this.throwIfUrlIsInvalid(serverUrl);
   }
 
   async intercept(req: HttpRequest, next: HttpHandler): Promise<HttpResponse> {
     if (req?.url?.includes('/api')) {
-      const url = new URL(req.url, this.serverUrl);
+      const url = new URL(req.url, this.serverUrl || window.origin);
       const path = url.pathname.replace('/api', '/');
       const segments = path.split('/').filter(Boolean);
       const resultPath = [this.serverUrl, this.apiPrefix, ...segments].filter(

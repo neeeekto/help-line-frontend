@@ -3,7 +3,7 @@ import cloneDeep from 'lodash/cloneDeep';
 
 export class HttpError extends Error implements HttpResponse {
   readonly config: Readonly<HttpRequest>;
-  readonly data?: any;
+  readonly data: any;
   readonly headers?: Readonly<Record<string, any>>;
   readonly status?: number;
   readonly statusText?: string;
