@@ -1,22 +1,24 @@
-import { getGreeting } from '../support/app.po';
-import { setupWorker } from 'msw';
 import { jobsFakeApi, jobStubFactory } from '@help-line/stub/admin';
-import { makeSuccessResponse } from '@help-line/stub/share';
+import {
+  extractUrlFromStubFactory,
+  makeSuccessResponse,
+} from '@help-line/stub/share';
+import { setupWorkerHooks, startWorker, worker } from '../support/mock-woker';
 
 describe('admin', () => {
-  const worker = setupWorker(
+  worker.use(
     jobsFakeApi.get(makeSuccessResponse([jobStubFactory.createJob()]))
   );
+  setupWorkerHooks();
   beforeEach(() => {
-    cy.wrap(null).then(async () => {
-      await worker.start();
-    });
-
     cy.visit('/');
   });
 
   it('should display welcome message', () => {
+    cy.intercept(extractUrlFromStubFactory(jobsFakeApi.get)).as('get');
     // Custom command example, see `../support/commands.ts` file
     cy.login('my-email@something.com', 'myPassword');
+    cy.wait('@get');
+    cy.get('#root');
   });
 });
