@@ -1,16 +1,18 @@
-import { RequestHandler, setupWorker } from 'msw';
+import {RequestHandler, setupWorker} from 'msw';
 
-export const runFakeServer = (...args: RequestHandler[]) => {
-  const worker = setupWorker(...args);
-  beforeEach(() => {
-    cy.wrap(null).then(async () => {
-      await worker.start();
-    });
-  });
-  afterEach(() => {
-    worker.stop();
-  });
+export const worker = setupWorker();
 
-  return worker;
+export const startMockServer = () => {
+  cy.wrap(worker.start(), {log: false}).log("Mock server started");
 };
+
+export const stopMockServer = () => {
+  worker.stop();
+  cy.log("Mock server stopped");
+};
+
+export const setupMockServer = (...handlers: RequestHandler[]) => {
+  startMockServer();
+  worker.resetHandlers(...handlers);
+}
 

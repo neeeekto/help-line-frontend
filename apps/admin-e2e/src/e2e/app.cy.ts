@@ -1,16 +1,20 @@
 import { jobsFakeApi, jobStubFactory } from '@help-line/stub/admin';
-import { makeSuccessResponse } from '@help-line/stub/share';
-import {setupWorker} from "msw";
+import {extractUrlFromStubFactory, makeSuccessResponse} from '@help-line/stub/share';
+import {setupMockServer} from "@help-line/testing/cy-utils";
 
 describe('admin', () => {
+
   beforeEach(() => {
-    const worker = setupWorker();
-    cy.wrap(worker.start(), { log: true })
-    worker.resetHandlers(jobsFakeApi.get(makeSuccessResponse([jobStubFactory.createJob()])));
+    setupMockServer(jobsFakeApi.get(makeSuccessResponse([jobStubFactory.createJob()])))
     cy.visit('/');
   });
 
   it('should display welcome message', () => {
-    cy.wait(100000);
+    // Custom command example, see `../support/commands.ts` file
+    cy.get('#root');
+  });
+  it('should display welcome message2', () => {
+    // Custom command example, see `../support/commands.ts` file
+    cy.get('#root');
   });
 });

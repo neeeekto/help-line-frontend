@@ -15,6 +15,7 @@
       "@help-line/core/root": ["../../libs/core/root/src/index.ts"],
       "@help-line/stub/admin": ["../../libs/stub/admin/src/index.ts"],
       "@help-line/stub/share": ["../../libs/stub/share/src/index.ts"],
+      "@help-line/testing/cy-utils": ["../../libs/testing/cy-utils/src/index.ts"],
     }
   },
   "include": ["src/**/*.ts", "src/**/*.js", "cypress.config.ts"]
