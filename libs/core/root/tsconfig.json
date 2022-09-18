@@ -10,7 +10,13 @@
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "baseUrl": ".",
+    "paths": {
+      "@help-line/core/auth": ["../auth/src/index.ts"],
+      "@help-line/core/events": ["../events/src/index.ts"],
+      "@help-line/core/http": ["../http/src/index.ts"],
+    }
   },
   "files": [],
   "include": [],

@@ -9,7 +9,7 @@ import {
   DefaultEventsProvider,
   QueryProvider,
 } from '@help-line/core/root';
-import { environment } from './environments/environment';
+import { environment } from '@app/env';
 import { SystemProvider } from './core/system/components';
 
 const root = ReactDOM.createRoot(

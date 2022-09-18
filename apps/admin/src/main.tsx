@@ -3,7 +3,7 @@ import * as ReactDOM from 'react-dom/client';
 
 import App from './app/app';
 import { AuthGuard, AuthProvider } from '@help-line/core/auth';
-import { environment } from './environments/environment';
+import { environment } from '@app/env';
 import {
   DefaultEventsProvider,
   DefaultHttpProvider,
