@@ -3,7 +3,7 @@ import { useJobsQuery } from '@help-line/api/admin';
 
 export function App() {
   const jobsQuery = useJobsQuery();
-  return <>{jobsQuery.isLoading ? 'loading' : 'hi!!!'} {jobsQuery.data?.length}</>;
+  return <>{jobsQuery.isLoading ? 'loading' : jobsQuery.data?.length}</>;
 }
 
 export default App;

@@ -16,6 +16,7 @@
     "stub-admin": "libs/stub/admin",
     "stub-client": "libs/stub/client",
     "stub-share": "libs/stub/share",
+    "testing-cy-utils": "libs/testing/cy-utils",
     "testing-unit-utils": "libs/testing/unit-utils"
   }
 }
