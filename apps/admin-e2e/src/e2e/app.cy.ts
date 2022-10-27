@@ -1,5 +1,5 @@
 import { jobsFakeApi, jobStubFactory } from '@help-line/stub/admin';
-import {extractUrlFromStubFactory, makeSuccessResponse} from '@help-line/stub/share';
+import {makeSuccessResponse} from '@help-line/stub/share';
 import {setupMockServer} from "@help-line/testing/cy-utils";
 
 describe('admin', () => {
@@ -15,6 +15,6 @@ describe('admin', () => {
   });
   it('should display welcome message2', () => {
     // Custom command example, see `../support/commands.ts` file
-    cy.get('#root');
+    cy.get('#root').should('contain.text', '1');
   });
 });

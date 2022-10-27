@@ -17,7 +17,7 @@
     "noFallthroughCasesInSwitch": true,
     "baseUrl": ".",
     "paths": {
-      "@help-line/core/http": ["../../core/http/src/index.ts"],
+      "@help-line/http": ["../../http/src/index.ts"],
     }
   }
 }

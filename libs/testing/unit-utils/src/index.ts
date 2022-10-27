@@ -1,1 +1,1 @@
-export * from './lib/testing-unit-utils';
+export * from './test-query-provider';

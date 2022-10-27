@@ -1,4 +1,4 @@
-import { ApiFactory } from '@help-line/core/http';
+import { ApiFactory } from '@help-line/http';
 import {
   DefaultBodyType,
   MockedRequest,

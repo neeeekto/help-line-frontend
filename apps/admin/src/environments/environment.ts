@@ -1,7 +1,7 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // When building for production, this file is replaced with `environment.prod.ts`.
 
-import { IEnvironment } from '@help-line/core/root';
+import { IEnvironment } from '@help-line/modules/root';
 
 export const environment: IEnvironment = {
   apiPrefix: process.env['REACT_APP_API_PREFIX'] || 'api',

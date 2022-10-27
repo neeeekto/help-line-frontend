@@ -2,14 +2,14 @@ import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';
 
 import App from './app/app';
-import { AuthProvider } from '@help-line/core/auth';
-import { AuthGuard } from '@help-line/core/auth';
+import { AuthProvider } from '@help-line/modules/auth';
+import { AuthGuard } from '@help-line/modules/auth';
 import {
   DefaultHttpProvider,
   DefaultEventsProvider,
   QueryProvider,
-} from '@help-line/core/root';
-import { environment } from '@app/env';
+} from '@help-line/kernel';
+import { environment } from './environments/environment';
 import { SystemProvider } from './core/system/components';
 
 const root = ReactDOM.createRoot(

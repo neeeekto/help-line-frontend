@@ -10,12 +10,7 @@
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "baseUrl": ".",
-    "paths": {
-      "@help-line/api/share": ["../share/src/index.ts"],
-      "@help-line/core/http": ["../../core/http/src/index.ts"]
-    }
+    "noFallthroughCasesInSwitch": true
   },
   "files": [],
   "include": [],
